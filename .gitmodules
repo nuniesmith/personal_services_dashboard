@@ -1,0 +1,3 @@
+[submodule "shared-nginx"]
+	path = shared-nginx
+	url = ../../shared/nginx

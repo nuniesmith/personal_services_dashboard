@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  nginx:
+    # Build from shared nginx submodule (expects Dockerfile at its root)
+    build:
+      context: ../shared-nginx
+      dockerfile: Dockerfile
+    container_name: sevengram-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - ../shared-nginx/.env
+    volumes:
+      # Mount custom overlay configs (optional)
+      - ../nginx:/etc/nginx/custom:ro
+      # Example: persist LetsEncrypt (adjust path as desired)
+      - nginx-cert-data:/etc/letsencrypt
+    restart: unless-stopped
+    networks:
+      - sevengram
+
+  dashboard-web:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dashboard
+    container_name: sevengram-web
+    environment:
+      - NODE_ENV=development
+    networks:
+      - sevengram
+    depends_on:
+      - nginx
+
+networks:
+  sevengram:
+    driver: bridge
+
+volumes:
+  nginx-cert-data:
+    driver: local
