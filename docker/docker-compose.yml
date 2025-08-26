@@ -4,14 +4,14 @@ services:
   nginx:
     # Build from shared nginx submodule (expects Dockerfile at its root)
     build:
-      context: ../shared-nginx
+      context: ../shared_nginx
       dockerfile: Dockerfile
     container_name: sevengram-nginx
     ports:
       - "80:80"
       - "443:443"
     env_file:
-      - ../shared-nginx/.env
+      - ../shared_nginx/.env
     volumes:
       # Mount custom overlay configs (optional)
       - ../nginx:/etc/nginx/custom:ro

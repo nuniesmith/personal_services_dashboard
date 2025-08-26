@@ -4,15 +4,15 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 ROOT_DIR="${SCRIPT_DIR}/.."
 cd "$ROOT_DIR"
 
-if [ ! -d shared-nginx/.git ]; then
-  echo "Submodule not initialized (shared-nginx). Run: git submodule update --init --recursive" >&2
+if [ ! -d shared_nginx/.git ]; then
+  echo "Submodule not initialized (shared_nginx). Run: git submodule update --init --recursive" >&2
   exit 1
 fi
 
-pushd shared-nginx >/dev/null
+pushd shared_nginx >/dev/null
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [ "$CURRENT_BRANCH" != "main" ]; then
-  echo "Switching shared-nginx to main branch" >&2
+  echo "Switching shared_nginx to main branch" >&2
   git checkout main
 fi
 
@@ -28,7 +28,7 @@ fi
 NEW_SHA=$(git rev-parse HEAD)
 popd >/dev/null
 
-echo "Pinned shared-nginx at $NEW_SHA"
+echo "Pinned shared_nginx at $NEW_SHA"
 
-git add shared-nginx
-echo "Submodule updated; commit this change (e.g. git commit -m 'chore: bump shared-nginx to $NEW_SHA')" >&2
+git add shared_nginx
+echo "Submodule updated; commit this change (e.g. git commit -m 'chore: bump shared_nginx to $NEW_SHA')" >&2

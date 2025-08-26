@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 PROJECT := 7gram
 COMPOSE := docker/docker-compose.yml
-SUBMODULE := shared-nginx
+SUBMODULE := shared_nginx
 
 .PHONY: help init up down logs pull update-submodule lint
 

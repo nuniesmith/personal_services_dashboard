@@ -10,7 +10,7 @@ This project hosts the 7gram dashboard (frontend + supporting services) while co
   nginx/                # (optional) overlay configs specific to 7gram
   docker/               # compose files / Docker assets for dashboard services
   scripts/              # helper scripts for local dev & CI/CD
-  shared-nginx/         # git submodule -> ../../shared/nginx (central infra)
+  shared_nginx/         # git submodule -> ../../shared/nginx (central infra)
 ```
 
 ## Adding the shared nginx submodule
@@ -18,9 +18,9 @@ This project hosts the 7gram dashboard (frontend + supporting services) while co
 Run:
 
 ```bash
-git submodule add ../../shared/nginx shared-nginx
+git submodule add ../../shared/nginx shared_nginx
 # Or if referencing remote origin
-# git submodule add git@github.com:<org-or-user>/nginx.git shared-nginx
+# git submodule add git@github.com:<org-or-user>/nginx.git shared_nginx
 ```
 
 Then commit `.gitmodules` plus the submodule entry.
@@ -28,7 +28,7 @@ Then commit `.gitmodules` plus the submodule entry.
 To update later:
 
 ```bash
-git submodule update --remote --merge shared-nginx
+git submodule update --remote --merge shared_nginx
 ```
 
 ## Development
@@ -39,7 +39,7 @@ git submodule update --remote --merge shared-nginx
    git submodule update --init --recursive
    ```
 
-2. Copy or override any environment values (see `shared-nginx/.env`).
+2. Copy or override any environment values (see `shared_nginx/.env`).
 3. Start local stack (example):
 
    ```bash
@@ -48,7 +48,7 @@ git submodule update --remote --merge shared-nginx
 
 ## Overriding Nginx Config
 
-Place custom server blocks or snippets inside `nginx/`. A simple include pattern is supported by adding lines into `shared-nginx/config/nginx/conf.d/` that reference files in `../../../../dashboards/7gram/nginx/` if you keep relative paths stable, or by copying a base template during build (see `docker/Dockerfile.nginx-overlay` for an example you can create).
+Place custom server blocks or snippets inside `nginx/`. A simple include pattern is supported by adding lines into `shared_nginx/config/nginx/conf.d/` that reference files in `../../../../dashboards/7gram/nginx/` if you keep relative paths stable, or by copying a base template during build (see `docker/Dockerfile.nginx-overlay` for an example you can create).
 
 ## Scripts
 
